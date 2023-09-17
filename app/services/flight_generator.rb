@@ -10,7 +10,7 @@ class FlightGenerator
   def generate(airports)
     Flight.create(
       seats_available: random.rand(10..150),
-      duration: Time.new.change({ hour: random.rand(0..23), min: random.rand(0..59) }),
+      duration: Time.new.change({ hour: random.rand(1..23), min: random.rand(0..59) }),
       departure_airport: airports.first,
       arrival_airport: airports.last,
       departure_date: date
