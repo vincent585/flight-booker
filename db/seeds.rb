@@ -24,50 +24,12 @@ Airport.create([
                  { name: 'Incheon International', iata_code: 'ICN' } # 12
                ])
 
-Flight.create([
-                { seats_available: 100,
-                  duration: Time.new.change({ hour: 4, min: 30 }),
-                  departure_date: DateTime.new(2023, 11, 19, 6, 30),
-                  departure_airport: Airport.find_by(iata_code: 'JFK'),
-                  arrival_airport: Airport.find_by(iata_code: 'ATL') },
-                { seats_available: 100,
-                  duration: Time.new.change({ hour: 1, min: 30 }),
-                  departure_date: DateTime.new(2023, 12, 25, 8, 0),
-                  departure_airport: Airport.find_by(iata_code: 'MCR'),
-                  arrival_airport: Airport.find_by(iata_code: 'CDG') },
-                { seats_available: 100,
-                  duration: Time.new.change({ hour: 2, min: 30 }),
-                  departure_date: DateTime.new(2024, 5, 21, 16, 0),
-                  departure_airport: Airport.find_by(iata_code: 'LBA'),
-                  arrival_airport: Airport.find_by(iata_code: 'NCE') },
-                { seats_available: 100,
-                  duration: Time.new.change({ hour: 12, min: 0 }),
-                  departure_date: DateTime.new(2024, 6, 19, 12, 15),
-                  departure_airport: Airport.find_by(iata_code: 'HND'),
-                  arrival_airport: Airport.find_by(iata_code: 'LAX') },
-                { seats_available: 100,
-                  duration: Time.new.change({ hour: 7, min: 30 }),
-                  departure_date: DateTime.new(2023, 11, 19, 16, 0),
-                  departure_airport: Airport.find_by(iata_code: 'ICN'),
-                  arrival_airport: Airport.find_by(iata_code: 'JFK') },
-                { seats_available: 100,
-                  duration: Time.new.change({ hour: 2, min: 30 }),
-                  departure_date: DateTime.new(2023, 11, 19, 12, 30),
-                  departure_airport: Airport.find_by(iata_code: 'ICN'),
-                  arrival_airport: Airport.find_by(iata_code: 'HKG') },
-                { seats_available: 100,
-                  duration: Time.new.change({ hour: 5, min: 30 }),
-                  departure_date: DateTime.new(2023, 11, 20, 9, 0),
-                  departure_airport: Airport.find_by(iata_code: 'ORD'),
-                  arrival_airport: Airport.find_by(iata_code: 'LAX') },
-                { seats_available: 100,
-                  duration: Time.new.change({ hour: 13, min: 30 }),
-                  departure_date: DateTime.new(2023, 11, 19, 11, 15),
-                  departure_airport: Airport.find_by(iata_code: 'CDG'),
-                  arrival_airport: Airport.find_by(iata_code: 'CAN') },
-                { seats_available: 100,
-                  duration: Time.new.change({ hour: 7, min: 30 }),
-                  departure_date: DateTime.new(2023, 11, 19, 6, 45),
-                  departure_airport: Airport.find_by(iata_code: 'JFK'),
-                  arrival_airport: Airport.find_by(iata_code: 'CDG') }
-              ])
+start = Time.zone.today
+finish = Time.zone.today + 30.days
+
+(start..finish).each do |date|
+  airports = Airport.all.sample(2)
+  flight_generator = FlightGenerator.new(date)
+
+  flight_generator.generate(airports)
+end
