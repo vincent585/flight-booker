@@ -28,8 +28,10 @@ start = Time.zone.today
 finish = Time.zone.today + 30.days
 
 (start..finish).each do |date|
-  airports = Airport.all.sample(2)
-  flight_generator = FlightGenerator.new(date)
+  5.times do
+    airports = Airport.all.sample(2)
+    flight_generator = FlightGenerator.new(date)
 
-  flight_generator.generate(airports)
+    flight_generator.generate(airports)
+  end
 end
