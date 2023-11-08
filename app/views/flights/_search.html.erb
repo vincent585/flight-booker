@@ -4,7 +4,7 @@
   <%= form.label :arrival_airport, 'Arrival airport' %>
   <%= form.select :arrival_airport, @airport_options %>
   <%= form.label :departure_date, 'Departure date' %>
-  <%= form.select 'departure_date', options_from_collection_for_select(@departure_dates, 'departure_date', :departure_date_formatted) %>
+  <%= form.select 'departure_date', options_from_collection_for_select(@departures.uniq { |d| d.departure_date }, 'departure_date', :departure_date_formatted) %>
   <%= form.label :passenger_count, 'Number of passengers' %>
   <%= form.select :passenger_count, %w[1 2 3 4]%>
   <%= form.submit 'Search' %>
