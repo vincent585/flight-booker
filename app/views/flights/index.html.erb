@@ -2,12 +2,8 @@
 
 <h2>Find a flight</h2>
 
-<%= render 'search', airport_options: @airport_options, departure_dates: @departure_dates %>
+<%= render 'search', airport_options: @airport_options, departures: @departures %>
 
 <% unless @flights.nil? %>
-  <% @flights.each do |flight| %>
-    <p><%= flight.departure_airport.name %> to <%= flight.arrival_airport.name %></p>
-    <p><%= flight.departure_date %></p>
-    <p><%= flight.duration %></p>
-  <% end %>
+ <%= render 'flight_selection', flights: @flights %>
 <% end %>
