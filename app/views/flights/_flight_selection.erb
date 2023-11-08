@@ -1,9 +1,9 @@
-<%= form_with method: :get do |form| %>
+<%= form_with url: 'bookings/new', method: :get do |form| %>
   <%= form.hidden_field :passenger_count, value: params[:passenger_count] %>
 
   <% @flights.each do |flight| %>
-    <%= form.radio_button :selected_flight, 'Select flight' %>
-    <%= form.label :selected_flight, 'Select this flight'%>
+    <%= form.radio_button :flight_id, flight.id %>
+    <%= form.label :flight_id, 'Select this flight'%>
     <div>
       <p><%= flight.departure_airport.iata_code %> - <%= flight.arrival_airport.iata_code %></p>
       <p><%= flight.departure_date %></p>
