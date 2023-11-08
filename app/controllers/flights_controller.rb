@@ -4,7 +4,7 @@
 class FlightsController < ApplicationController
   def index
     @airport_options = Airport.all.map { |a| ["#{a.name} - #{a.iata_code}", a.iata_code] }
-    @departure_dates = Airport.all.flat_map(&:departing_flights)
+    @departures = Airport.all.flat_map(&:departing_flights).sort_by(&:departure_date)
 
     @flights = flight_search_params.empty? ? Flight.first(5) : find_flights
   end
@@ -24,7 +24,8 @@ class FlightsController < ApplicationController
     params.except(:commit).permit(
       :departure_airport,
       :arrival_airport,
-      :departure_date
+      :departure_date,
+      :passenger_count
     )
   end
 end
