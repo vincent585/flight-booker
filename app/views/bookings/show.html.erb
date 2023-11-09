@@ -1,0 +1,16 @@
+<h1>Thanks for booking!</h1>
+<h2>Your flight details</h2>
+
+<div>
+  <p>Departure date: <%= @booking.flight.departure_date_formatted %></p>
+  <p>Departure airport: <%= "#{@booking.flight.departure_airport.name} - #{@booking.flight.departure_airport.iata_code}" %></p>
+  <p>Arrival airport: <%= "#{@booking.flight.arrival_airport.name} - #{@booking.flight.arrival_airport.iata_code}" %></p>
+</div>
+
+<h2>Passenger details</h2>
+<div>
+  <% @booking.passengers.each do |p| %>
+    <p>Name: <%= p.name %></p>
+    <p>Email: <%= p.email %></p>
+  <% end %>
+</div>
