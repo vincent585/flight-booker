@@ -1,10 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-    static targets = [ "form", "added" ]
+    static targets = [ "form", "added", "removed" ]
     static values = { index: Number }
 
-    addPassenger() {
+    add() {
         if ("content" in document.createElement("template")) {
             const form = this.formTarget
             const template = this.addedTarget
@@ -27,5 +27,13 @@ export default class extends Controller {
 
             form.appendChild(clone)
         }
+    }
+
+    removePax() {
+        if (this.removedTargets.length === 1) {
+            return;
+        }
+
+        this.removedTargets[this.removedTargets.length - 1].remove()
     }
 }

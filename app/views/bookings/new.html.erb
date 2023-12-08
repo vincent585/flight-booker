@@ -11,22 +11,29 @@
     <div>
       <%= form.fields_for :passengers do |sub_form| %>
         <div data-passenger-target="form">
-          <strong>Passenger Details</strong> <br>
-          <%= sub_form.label :name, 'Name' %>
-          <%= sub_form.text_field :name %> <br>
-          <%= sub_form.label :email, 'Email' %>
-          <%= sub_form.text_field :email %> <br> <br>
+          <div data-passenger-target="removed">
+            <strong>Passenger Details</strong> <br>
+            <%= sub_form.label :name, 'Name' %>
+            <%= sub_form.text_field :name %> <br>
+            <%= sub_form.label :email, 'Email' %>
+            <%= sub_form.text_field :email %> <br> <br>
+
+            <template data-passenger-target="added">
+              <div data-passenger-target="removed">
+                <strong>Passenger Details</strong> <br>
+                <%= sub_form.label :name, 'Name' %>
+                <%= sub_form.text_field :name %> <br>
+                <%= sub_form.label :email, 'Email' %>
+                <%= sub_form.text_field :email %> <br> <br>
+              </div>
+            </template>
+          </div>
         </div>
-        <template data-passenger-target="added">
-          <%= sub_form.label :name, 'Name' %>
-          <%= sub_form.text_field :name %> <br>
-          <%= sub_form.label :email, 'Email' %>
-          <%= sub_form.text_field :email %> <br> <br>
-        </template>
       <% end %>
     </div>
     <%= form.submit 'Make booking' %>
   <% end %>
-  <button data-action="passenger#addPassenger">Add Passenger</button>
+  <button data-action="passenger#add">Add Passenger</button>
+  <button data-action="passenger#removePax">Remove Passenger</button>
 </div>
 
