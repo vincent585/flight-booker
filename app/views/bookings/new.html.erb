@@ -1,22 +1,32 @@
 <h1>New Booking</h1>
-<%= form_with model: @booking do |form| %>
-  <div>
-    <%= form.hidden_field :flight_id, value: @flight.id %>
-    <h2><%= "#{@flight.departure_airport.iata_code} - #{@flight.arrival_airport.iata_code}" %></h2>
-    <p>Departing on: <%= @flight.departure_date_formatted %></p>
-    <p>Departure airport: <%= @flight.departure_airport.name %></p>
-    <p>Arrival airport: <%= @flight.arrival_airport.name %></p>
-  </div>
-  <div>
-    <%= form.fields_for :passengers do |sub_form| %>
-      <div>
-        <strong>Passenger Details</strong> <br>
-        <%= sub_form.label :name, 'Name' %>
-        <%= sub_form.text_field :name %> <br>
-        <%= sub_form.label :email, 'Email' %>
-        <%= sub_form.text_field :email %> <br>
-      </div>
-    <% end %>
-  </div>
-  <%= form.submit 'Make booking' %>
-<% end %>
+<div data-controller="passenger" data-passenger-index-value="<%= @booking.passengers.count %>">
+  <%= form_with model: @booking do |form| %>
+    <div>
+      <%= form.hidden_field :flight_id, value: @flight.id %>
+      <h2><%= "#{@flight.departure_airport.iata_code} - #{@flight.arrival_airport.iata_code}" %></h2>
+      <p>Departing on: <%= @flight.departure_date_formatted %></p>
+      <p>Departure airport: <%= @flight.departure_airport.name %></p>
+      <p>Arrival airport: <%= @flight.arrival_airport.name %></p>
+    </div>
+    <div>
+      <%= form.fields_for :passengers do |sub_form| %>
+        <div data-passenger-target="form">
+          <strong>Passenger Details</strong> <br>
+          <%= sub_form.label :name, 'Name' %>
+          <%= sub_form.text_field :name %> <br>
+          <%= sub_form.label :email, 'Email' %>
+          <%= sub_form.text_field :email %> <br> <br>
+        </div>
+        <template data-passenger-target="added">
+          <%= sub_form.label :name, 'Name' %>
+          <%= sub_form.text_field :name %> <br>
+          <%= sub_form.label :email, 'Email' %>
+          <%= sub_form.text_field :email %> <br> <br>
+        </template>
+      <% end %>
+    </div>
+    <%= form.submit 'Make booking' %>
+  <% end %>
+  <button data-action="passenger#addPassenger">Add Passenger</button>
+</div>
+
