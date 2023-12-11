@@ -1,0 +1,14 @@
+<h1>Thanks for booking your flight to <%= @booking.flight.arrival_airport.name %>!</h1>
+
+<h2>Your booking details:</h2>
+
+<h3><strong>Departure date:</strong> <%= @booking.flight.departure_date_formatted %></h3>
+<h3><strong>Duration:</strong> <%= (@booking.flight.duration / 60.to_f).round(2) %> hours</h3>
+<h3><strong>Departure airport:</strong> <%= @booking.flight.departure_airport.iata_code %></h3>
+<h3><strong>Arrival airport:</strong> <%= @booking.flight.arrival_airport.iata_code %></h3>
+<div>
+  <h3><strong>Passenger details:</strong></h3>
+  <% @booking.passengers.each do |passenger| %>
+    <p><%= passenger.name %></p>
+  <% end %>
+</div>

@@ -1,0 +1,13 @@
+Thanks for booking your flight to <%= @booking.flight.arrival_airport.name %>!
+==============================================================================
+Your booking details
+------------------------------------------------------------------------------
+Departure date: <%= @booking.flight.departure_date_formatted %>
+Duration: <%= (@booking.flight.duration / 60.to_f).round(2) %> hours
+Departure airport: <%= @booking.flight.departure_airport.iata_code %>
+Arrival airport: <%= @booking.flight.arrival_airport.iata_code %>
+------------------------------------------------------------------------------
+Passenger details
+<% @booking.passengers.each do |passenger| %>
+  <%= passenger.name %>
+<% end %>
